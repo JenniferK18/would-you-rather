@@ -3,15 +3,29 @@ import { connect } from "react-redux";
 import Question from "./Question";
 
 class Homepage extends Component {
+  state = {
+    showAnsweredQuestions: false,
+  }
+
+  toggleQuestions = (e) => {
+    e.preventDefault();
+    this.setState((prevState) => {
+      return {
+        showAnsweredQuestions: !prevState.showAnsweredQuestions
+      }
+    })
+  }
+
   render() {
+    const { showAnsweredQuestions } = this.state
     return (
       <div>
         <h1>Would You Rather?</h1>
+        <h2>{showAnsweredQuestions ? "Your Answered Questions" : "Your Unanswered Questions"}</h2>
+        <button onClick={this.toggleQuestions}>Switch to {showAnsweredQuestions ? 'unanswered' : 'answered'} questions</button>
         <ul>
           {this.props.questionIDs.map(questionID => (
-          <li key={questionID}>
-            <Question qid={questionID} />
-          </li>
+            <Question key={questionID} qid={questionID} showAnsweredQuestions={showAnsweredQuestions} />
           ))}
         </ul>
       </div>

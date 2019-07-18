@@ -22,24 +22,28 @@ class Question extends Component {
 
   render() {
     const { optionOne, optionTwo, author } = this.props.question
+    const { showAnsweredQuestions } = this.props
     return (
-      <div>
-        <h2>Would you rather...</h2>
-        <button 
-          onClick={ e => this.handleVote(e, true) }
-          disabled={this.isDisabledForUser()}
-        >
-          {optionOne.text} - {optionOne.votes.length} votes
-        </button>
-        <p>or</p>
-        <button 
-          onClick={ e => this.handleVote(e, false) }
-          disabled={this.isDisabledForUser()}
-        >
-          {optionTwo.text} - {optionTwo.votes.length} votes
-        </button>
-        <p>Question provided by: { author }</p>
-      </div>
+      ((showAnsweredQuestions && this.isDisabledForUser()) || (!showAnsweredQuestions && !this.isDisabledForUser())) &&
+        <li>
+          <div>
+            <h2>Would you rather...</h2>
+            <button 
+              onClick={ e => this.handleVote(e, true) }
+              disabled={this.isDisabledForUser()}
+            >
+              {optionOne.text} - {optionOne.votes.length} votes
+            </button>
+            <p>or</p>
+            <button 
+              onClick={ e => this.handleVote(e, false) }
+              disabled={this.isDisabledForUser()}
+            >
+              {optionTwo.text} - {optionTwo.votes.length} votes
+            </button>
+            <p>Question provided by: { author }</p>
+          </div>
+        </li>
     )
   }
 }
