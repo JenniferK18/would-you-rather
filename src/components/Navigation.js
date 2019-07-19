@@ -6,6 +6,11 @@ export default function Navigation () {
     <nav>
       <ul>
         <li>
+          <NavLink to='/login' activeClassName='active'>
+            Log out
+          </NavLink>
+        </li>
+        <li>
           <NavLink to='/' exact activeClassName='active'>
             Home
           </NavLink>

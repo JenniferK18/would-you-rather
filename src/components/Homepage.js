@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Question from "./Question";
+import QuestionBrief from "./QuestionBrief";
+import { Redirect } from 'react-router-dom'
 
 class Homepage extends Component {
   state = {
@@ -18,14 +19,20 @@ class Homepage extends Component {
 
   render() {
     const { showAnsweredQuestions } = this.state
+    const { authedUser } = this.props
+    if (!authedUser) {
+      return <Redirect to='/login' />
+    }
     return (
       <div>
+        <br />
+        <p>Hello, {authedUser}!</p>
         <h1>Would You Rather?</h1>
         <h2>{showAnsweredQuestions ? "Your Answered Questions" : "Your Unanswered Questions"}</h2>
         <button onClick={this.toggleQuestions}>Switch to {showAnsweredQuestions ? 'unanswered' : 'answered'} questions</button>
         <ul>
           {this.props.questionIDs.map(questionID => (
-            <Question key={questionID} qid={questionID} showAnsweredQuestions={showAnsweredQuestions} />
+            <QuestionBrief key={questionID} qid={questionID} showAnsweredQuestions={showAnsweredQuestions} />
           ))}
         </ul>
       </div>
@@ -33,12 +40,12 @@ class Homepage extends Component {
   }
 }
 
-function mapStateToProps({ questions }) {
-  console.log('questions: ', questions)
+function mapStateToProps({ questions, authedUser }) {
   return {
     questionIDs: Object.keys(questions).sort(
       (a, b) => questions[b].timestamp - questions[a].timestamp
-    )
+    ),
+    authedUser
   };
 }
 

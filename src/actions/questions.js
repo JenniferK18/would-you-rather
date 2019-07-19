@@ -21,7 +21,7 @@ export function handleChooseAnswer(info) {
     dispatch(chooseAnswer(info))
     return _saveQuestionAnswer(info)
     .catch((e) => {
-      console.warn('Error in handleChooseAnswer:', e)
+      console.warn('Error in handleChooseAnswer: ', e)
       dispatch(removeAnswer(info))
       alert('There was an error saving your answer. Please try again.')
     })

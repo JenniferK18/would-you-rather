@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
+import { Redirect } from 'react-router-dom'
 
 class NewQuestion extends Component {
   state = {
     optionOne: '',
     optionTwo: '',
+    toHome: false,
   }
 
   handleChangeOptionOne = e => {
@@ -28,11 +30,19 @@ class NewQuestion extends Component {
     this.setState({
       optionOne: '',
       optionTwo: '',
+      toHome: true,
     })
   }
 
   render() {
-    const { optionOne, optionTwo } = this.state
+    const { optionOne, optionTwo, toHome } = this.state
+    const { authedUser } = this.props
+    if (!authedUser) {
+      return <Redirect to='/login' />
+    }
+    if (toHome === true) {
+      return <Redirect to='/' />
+    }
     return (
       <div>
         <h3>Would you rather...</h3>
@@ -62,4 +72,10 @@ class NewQuestion extends Component {
   }
 }
 
-export default connect()(NewQuestion);
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser
+  };
+}
+
+export default connect(mapStateToProps)(NewQuestion);
