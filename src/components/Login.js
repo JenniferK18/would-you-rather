@@ -5,14 +5,20 @@ import { Redirect } from 'react-router-dom'
 
 class Login extends Component {
 
+  state = {
+    currentUser: this.props.userIDs[0],
+    toHome: false
+  }
+
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(handleSetAuthedUser(null))
   }
 
-  state = {
-    currentUser: this.props.userIDs[0],
-    toHome: false
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      currentUser: nextProps.userIDs[0],
+    })
   }
 
   logInUser = (event) => {
