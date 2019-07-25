@@ -22,11 +22,11 @@ class App extends Component {
         <Fragment>
           <Navigation />
           <Route path='/' exact component={ Homepage } />
-          <Route path='/login' component= { Login } />
-          <Route path='/questions/:id' component= { Question } />
-          <Route path='/add' component= { NewQuestion } />
-          <Route path='/leaderboard' component= { Leaderboard } />
-          <Route path='/error' component= { ErrorScreen } />
+          <Route path='/login' component={ Login } />
+          <Route path='/questions/:id' component={ Question } />
+          <Route path='/add' component={ NewQuestion } />
+          <Route path='/leaderboard' component={ Leaderboard } />
+          <Route path='/error' component={ ErrorScreen } />
         </Fragment>
       </Router>
       
