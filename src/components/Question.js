@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { handleChooseAnswer } from '../actions/questions'
 import { Redirect } from 'react-router-dom'
@@ -36,9 +36,12 @@ class Question extends Component {
           {optionOne.text}
         </button>
         { this.userHasAnswered() && 
-          <span>
-            {`   ${optionOne.votes.length} vote(s), ${optionOne.votes.length / (optionOne.votes.length + optionTwo.votes.length) * 100}%`}
-          </span>
+          <Fragment>
+            <span>
+              {`   ${optionOne.votes.length} vote(s), ${(optionOne.votes.length / (optionOne.votes.length + optionTwo.votes.length) * 100).toFixed(2)}%`}
+            </span>
+            { optionOne.votes.includes(authedUser) && <div>You voted for this option.</div> }
+          </Fragment>
         }
         <p>or</p>
         <button 
@@ -48,9 +51,12 @@ class Question extends Component {
           {optionTwo.text}
         </button>
         { this.userHasAnswered() && 
-          <span>
-            {`   ${optionTwo.votes.length} vote(s), ${optionTwo.votes.length / (optionTwo.votes.length + optionOne.votes.length) * 100}%`}
-          </span>
+          <Fragment>
+            <span>
+              {`   ${optionTwo.votes.length} vote(s), ${(optionTwo.votes.length / (optionTwo.votes.length + optionOne.votes.length) * 100).toFixed(2)}%`}
+            </span>
+            { optionTwo.votes.includes(authedUser) && <div>You voted for this option.</div> }
+          </Fragment>
         }
         <p>Question provided by: { author }</p>
         <img 
