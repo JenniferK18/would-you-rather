@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 class User extends Component {
   render() {
     const { user } = this.props
+    console.log('user: ', user)
     const questionsAsked = user.questions.length
     const questionsAnswered = Object.keys(user.answers).length
     return (

@@ -1,4 +1,5 @@
 import { _saveQuestion, _saveQuestionAnswer } from '../utils/_DATA'
+import { updateUserQuestion, updateUserAnswer } from '../actions/users'
 
 export const ADD_QUESTION = 'ADD_QUESTION'
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
@@ -12,13 +13,17 @@ export function handleAddQuestion(optionOne, optionTwo) {
       optionOneText: optionOne,
       optionTwoText: optionTwo,
       author: authedUser
-    }).then(question => dispatch(addQuestion(question)))
+    }).then(question => {
+      dispatch(addQuestion(question))
+      dispatch(updateUserQuestion(question))
+    })
   }
 }
 
 export function handleChooseAnswer(info) {
   return (dispatch) => {
     dispatch(chooseAnswer(info))
+    dispatch(updateUserAnswer(info))
     return _saveQuestionAnswer(info)
     .catch((e) => {
       console.warn('Error in handleChooseAnswer: ', e)
