@@ -21,11 +21,16 @@ class Question extends Component {
   }
 
   render() {
-    const { users, authedUser } = this.props
+    const { users, authedUser, question } = this.props
     if (!authedUser) {
-      return <Redirect to='/login' />
+      return <Redirect to={{
+        pathname: '/login',
+        state: {
+          redirectError: true,
+        }
+      }} />
     }
-    const { optionOne, optionTwo, author } = this.props.question
+    const { optionOne, optionTwo, author } = question
     return (
       <div>
         <h2>Would you rather...</h2>

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleSetAuthedUser } from '../actions/authedUser'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
 class Login extends Component {
 
   state = {
     currentUser: this.props.userIDs[0],
-    toHome: false
+    toHome: false,
   }
 
   componentDidMount() {
@@ -39,8 +39,11 @@ class Login extends Component {
 
   render() {
     const { currentUser, toHome } = this.state
-    const { userIDs } = this.props
+    const { userIDs, location } = this.props
 
+    if (location.state && toHome) {
+      return <Redirect to='/error' />
+    }
     if (toHome === true) {
       return <Redirect to='/' />
     }
@@ -67,4 +70,4 @@ function mapStateToProps({ users, authedUser }) {
   }
 }
  
-export default connect(mapStateToProps)(Login);
+export default withRouter(connect(mapStateToProps)(Login));
