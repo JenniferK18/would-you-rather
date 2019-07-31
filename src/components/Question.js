@@ -26,9 +26,12 @@ class Question extends Component {
       return <Redirect to={{
         pathname: '/login',
         state: {
-          redirectError: true,
+          from: this.props.location.pathname
         }
       }} />
+    }
+    if(!question) {
+      return <Redirect to="/error" />
     }
     const { optionOne, optionTwo, author } = question
     return (

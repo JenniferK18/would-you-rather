@@ -1,9 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class ErrorScreen extends Component {
-  render() {
-    return <h3>404 Error - The question ID you entered was not valid.</h3>
-  }
+const ErrorScreen = () => {
+  return <h3>404 Error - The question ID you entered was not valid.</h3>
 }
 
 export default ErrorScreen;

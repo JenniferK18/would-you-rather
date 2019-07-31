@@ -42,7 +42,7 @@ class Login extends Component {
     const { userIDs, location } = this.props
 
     if (location.state && toHome) {
-      return <Redirect to='/error' />
+      return <Redirect to={location.state.from} />
     }
     if (toHome === true) {
       return <Redirect to='/' />

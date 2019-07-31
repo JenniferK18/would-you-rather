@@ -38,7 +38,12 @@ class NewQuestion extends Component {
     const { optionOne, optionTwo, toHome } = this.state
     const { authedUser } = this.props
     if (!authedUser) {
-      return <Redirect to='/login' />
+      return <Redirect to={{
+        pathname: '/login',
+        state: {
+          from: this.props.location.pathname
+        }
+      }} />
     }
     if (toHome === true) {
       return <Redirect to='/' />
