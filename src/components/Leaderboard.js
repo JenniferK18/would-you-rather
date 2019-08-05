@@ -3,13 +3,16 @@ import { connect } from "react-redux";
 import User from './User'
 import { Redirect } from 'react-router-dom'
 
-const Leaderboard = () => {
-  const { authedUser, userIDs } = this.props
+const Leaderboard = ({
+  authedUser,
+  userIDs,
+  location
+}) => {
   if (!authedUser) {
     return <Redirect to={{
       pathname: '/login',
       state: {
-        from: this.props.location.pathname
+        from: location.pathname
       }
     }} />
   }

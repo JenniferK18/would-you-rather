@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const User = () => {
-  const { user } = this.props
-  console.log('user: ', user)
+const User = ({
+  user
+}) => {
   const questionsAsked = user.questions.length
   const questionsAnswered = Object.keys(user.answers).length
   return (

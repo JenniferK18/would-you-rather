@@ -10,16 +10,9 @@ class NewQuestion extends Component {
     toHome: false,
   }
 
-  handleChangeOptionOne = e => {
-    const optionOne = e.target.value;
+  handleChangeOption = e => {
     this.setState({
-      optionOne
-    })
-  }
-  handleChangeOptionTwo = e => {
-    const optionTwo = e.target.value;
-    this.setState({
-      optionTwo
+      [e.target.name]: e.target.value
     })
   }
   handleSubmit = e => {
@@ -54,12 +47,14 @@ class NewQuestion extends Component {
         <form onSubmit={this.handleSubmit}>
           <div>
             <textarea 
+              name="optionOne"
               placeholder="Your first option"
               value={optionOne}
               onChange={this.handleChangeOptionOne}
             />
             <div>or</div>
             <textarea 
+              name="optionTwo"
               placeholder="Your second option"
               value={optionTwo}
               onChange={this.handleChangeOptionTwo}
